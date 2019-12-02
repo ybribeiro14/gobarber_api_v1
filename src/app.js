@@ -3,6 +3,7 @@ import 'dotenv/config';
 
 import express from 'express';
 import path from 'path';
+import cors from 'cors';
 import * as Sentry from '@sentry/node';
 import Youch from 'youch';
 import sentryConfig from './config/sentry';
@@ -33,6 +34,7 @@ class App {
   middlewares() {
     // Configura o servidor para ler requisões que retornam arquivos json.
     this.server.use(Sentry.Handlers.requestHandler());
+    this.server.use(cors());
     this.server.use(express.json());
     this.server.use(
       '/files',
